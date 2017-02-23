@@ -1,0 +1,107 @@
+# main | Nomear pacote como "exemploLista"
+
+
+package exemploLista;
+
+public class Teste {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Elemento lst = new Elemento();
+		lst.criar();
+
+		lst = lst.inserir(34);
+		lst = lst.inserir(50);
+		lst = lst.inserir(32);
+		lst = lst.inserir(28);
+		
+		lst.imprimir2();
+		
+		Elemento resultado = lst.buscar(32);
+		System.out.println("Resultado-> Elemento.info:" + resultado.info);
+		
+		resultado.imprimir2();
+		
+		System.out.println("Remover-> 100");
+		lst = lst.remover(100);
+		
+		lst.imprimir2();	
+	}
+}
+
+_________________________________________________________________________________________________________________________
+
+// classe Elemento.java
+
+package exemploLista;
+
+public class Elemento {
+	int info;
+	Elemento proximo;
+	
+	public Elemento criar(){
+		return null;
+	}
+	public Elemento inserir(int info){
+		Elemento novo = new Elemento();
+		novo.info = info;
+		novo.proximo = this;
+		
+		return novo;
+	}	
+	public void imprimir(){
+		Elemento p;
+		for (p = this; p!= null; p = p.proximo){
+			System.out.println("Elemento.info: "+ p.info);
+		}
+	}
+	public void imprimir2(){
+		Elemento p = this;
+		while (p!= null){
+			System.out.println("Elemento.info: "+ p.info);
+			p = p.proximo;
+		}
+	}
+	public void imprimir3(){
+		System.out.println("Elemento.info: "+ this.info); 
+		if (this.proximo != null){
+			this.proximo.imprimir3();
+		}
+	}
+	
+	public boolean eVazia(){
+		return (this == null);
+	}
+	
+	public Elemento buscar(int infoBusca){
+		Elemento p = this;
+		while (p!= null){
+			if (p.info == infoBusca){
+				return p;
+			}else{
+				p = p.proximo;
+			}
+		}
+		return null;
+	}	
+	
+	public Elemento remover(int info){
+		Elemento a = null; 
+		Elemento p = this;
+		
+		while (p != null && p.info != info){
+			a = p;
+			p = p.proximo;
+		}
+		if (p==null){
+			return this;
+		}
+		if (a== null){
+			return p.proximo;
+		}else{
+			a.proximo = p.proximo;
+		}
+		p = null;
+		return this;
+	}
+}
